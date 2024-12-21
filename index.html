@@ -88,7 +88,7 @@
 <body>
     <h1>1坪当たりの金額計算</h1>
     <form id="calc-form">
-        <label for="price">金額（万単位）:</label>
+        <label for="price">金額（万）:</label>
         <input type="number" id="price" placeholder="例: 1.5億の場合15000と入力" required>
 
         <label for="area">面積（㎡）:</label>
@@ -125,7 +125,7 @@
             const remainingYen = Math.round(pricePerTsubo % 10000);
 
             document.getElementById('result').innerHTML =
-                `1坪当たりの金額: <span>${formattedPrice}円</span> (<span>${priceInMan}万${remainingYen}円</span>)`;
+                `坪単価: <span>${formattedPrice}円</span> (<span>${priceInMan}万${remainingYen}円</span>)`;
         }
     </script>
 
