@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>坪単価計算ツール</title>
+    <title>坪,平米単価計算ツール</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,7 +86,7 @@
 </head>
 
 <body>
-    <h1>坪単価計算ツール</h1>
+    <h1>坪,平米単価計算ツール</h1>
     <form id="calc-form">
         <label for="price">金額（万）:</label>
         <input type="number" id="price" placeholder="例: 1.5億の場合15000と入力" required>
@@ -114,18 +114,26 @@
 
             const tsubo = area / 3.30579;
             const pricePerTsubo = price / tsubo;
+            const pricePerSquareMeter = price / area;
 
             // 数値フォーマット
-            const formattedPrice = pricePerTsubo.toLocaleString('ja-JP', {
+            const formattedTsuboPrice = pricePerTsubo.toLocaleString('ja-JP', {
+                maximumFractionDigits: 2
+            });
+            const formattedSquareMeterPrice = pricePerSquareMeter.toLocaleString('ja-JP', {
                 maximumFractionDigits: 2
             });
 
             // 万円表記
-            const priceInMan = Math.floor(pricePerTsubo / 10000);
-            const remainingYen = Math.round(pricePerTsubo % 10000);
+            const tsuboPriceInMan = Math.floor(pricePerTsubo / 10000);
+            const tsuboRemainingYen = Math.round(pricePerTsubo % 10000);
+
+            const squareMeterPriceInMan = Math.floor(pricePerSquareMeter / 10000);
+            const squareMeterRemainingYen = Math.round(pricePerSquareMeter % 10000);
 
             document.getElementById('result').innerHTML =
-                `坪単価: <span>${formattedPrice}円</span> (<span>${priceInMan}万${remainingYen}円</span>)`;
+                `坪単価: <span>${formattedTsuboPrice}円</span> (<span>${tsuboPriceInMan}万${tsuboRemainingYen}円</span>)<br>
+                平米単価: <span>${formattedSquareMeterPrice}円</span> (<span>${squareMeterPriceInMan}万${squareMeterRemainingYen}円</span>)`;
         }
     </script>
 
